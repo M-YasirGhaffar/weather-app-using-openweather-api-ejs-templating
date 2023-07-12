@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather Forecast -using weather api</title>
+</head>
+
+<link rel="stylesheet" href="/css/styles.css">
+
+<header>&#9888;This website serves as a demonstration of my understanding and utilization of APIs. It is not designed to be responsive or optimized for different devices or screen sizes. Its purpose is solely to showcase my knowledge and skills in working with APIs.</header>
+
+<body>
+  <h1 id="heading">Weather Forecast for <%= city %></h1>
+
+  <div class="grid">
+    <% let currentDay = ''; %>
+    <% forecast.forEach(function(item) { %>
+      <% if (currentDay !== item.dayName) { %>
+        <% currentDay = item.dayName; %>
+        <div class="grid-item">
+          <h2><%= currentDay %> <img src="<%= item.weatherIconUrl %>" alt="Weather Icon"></h2>
+          <h3><%= item.weatherMain %> - <%= item.weatherStatus %></h3>
+          <ul>
+      <% } %>
+      <li><span><%= item.time %>:</span> <%= item.temperature %>°C <span>Feels like:</span> <%= item.feels_like %>°C <span>PoP:</span> <%= item.precipitationProbability%>% <span>Humidity:</span> <%= item.humidity%></li>
+      <% if (currentDay !== forecast[forecast.length - 1].dayName && forecast[forecast.indexOf(item) + 1].dayName !== currentDay) { %>
+        </ul>
+        </div>
+      <% } %>
+    <% }); %>
+  </div>
+
+</body>
+</html>
