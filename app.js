@@ -1,13 +1,18 @@
+// app.js or index.js
+require('dotenv').config();
+
 const express = require("express");
 const app = express();
 const https = require("https");
 const bodyParser = require("body-parser");
+
 
 const ejs = require("ejs");
 const path = require("path");
 
 const port = 3000;
 
+const apiKey = process.env.OPEN_WHEATHER_API;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs"); 
@@ -30,7 +35,7 @@ app.post("/", function (request, response) {
     const url =
       "https://api.openweathermap.org/data/2.5/forecast?q=" +
       input_value +
-      "&appid=84fcf4394ba49a80603188fafe6639ab&units=metric";
+      "&appid=" + apiKey + "&units=metric";
   
     https.get(url, function (res) {
     //   console.log(res.statusCode);
