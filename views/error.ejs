@@ -8,23 +8,24 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<body>
+<body style="background: black; color: white;">
     <div id="error-message">
-        <h1>Oops!</h1>
+        <h1 style="color: red;">Oops!</h1>
         <% if (error && error.message) { %>
             <p>
                 <%= error.message %>
             </p>
             <% } else { %>
-                <p>An unexpected error occurred. Please try again later.</p>
+                <h2>An unexpected error occurred. Please try again later.</h2>
                 <% } %>
-                    <a href="/">Go Back to Home</a>
+                <a href="/"><p>Go Back to Home</p></a>
+                <h2  id="count-down"></h2>
     </div>
 
 
     <script>
         const redirectCountdown = () => {
-            let countdown = 10;
+            let countdown = 100;
             let countdownInterval = setInterval(function () {
                 document.getElementById('count-down').innerText = countdown + ' seconds';
 
@@ -39,10 +40,6 @@
 
         redirectCountdown();
     </script>
-
-    <div>
-        <h1 style="font-size: 60px;" id="count-down"></h1>
-    </div>
 
 </body>
 
