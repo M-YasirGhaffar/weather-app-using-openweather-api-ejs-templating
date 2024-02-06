@@ -16,12 +16,10 @@
 <body>
 
     <script>
-
         function checkCondition(givenDateTime, sunriseTime, sunsetTime) {
             let givenTime = givenDateTime.split(', ')[1];
             givenTime = givenTime.substr(0, givenTime.lastIndexOf(' '));
             let given = new Date('2000-01-01T' + givenTime);
-
             let sunrise = new Date('2000-01-01T' + sunriseTime);
             let sunset = new Date('2000-01-01T' + sunsetTime);
 
@@ -31,7 +29,6 @@
                 return "Night";
             }
         }
-
         const given = '<%= new Date(weather.dt * 1000).toLocaleString() %>'
         const sunrise = '<%= new Date(weather.sunrise * 1000).toLocaleTimeString() %>'
         const sunset = '<%= new Date(weather.sunset * 1000).toLocaleTimeString() %>'
@@ -52,28 +49,35 @@
         bodyStyle.style.backgroundImage = 'url(/assets/' + condition + '.gif)';
     </script>
 
-<nav class="navbar">
-    <a href="#" class="logo">SkyCaster</a>
-    <div class="nav-items">
-        <form class="search-form" action="/weather" method="get">
-            <input type="text" id="cityName" name="cityName" placeholder="Enter City Name" required>
-            <button type="submit">Search</button>
-        </form>
-        <a href="#forecast">Forecast</a>
-        <a href="#graphs">Graphs</a>
-    </div>
-    <button class="nav-toggle" aria-label="toggle navigation">
-        <span class="hamburger"></span>
-    </button>
-</nav>
+    <nav class="navbar">
+        <a href="#" class="logo">SkyCaster</a>
+        <div class="nav-items">
+            <form class="search-form" action="/weather" method="get">
+                <input type="text" id="cityName" name="cityName" placeholder="Enter City Name" required>
+                <button class="submit-button" type="submit">&#128270;</button>
+            </form>
+            <a href="#forecast">Forecast</a>
+            <a href="#graphs">Graphs</a>
+        </div>
+        <button class="nav-toggle" aria-label="toggle navigation">
+            &equiv;
+        </button>
+    </nav>
 
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const navItems = document.querySelector('.nav-items');
+
+        navToggle.addEventListener('click', () => {
+            console.log('clicked')
+            navItems.classList.toggle('active');
+        });
+    </script>
 
     <section id="everything">
 
         <% if (weather) { %>
-
             <div id="weather" class="weather">
-
                 <div class="weather-entry">
                     <div class="weather-intro">
                         <img class="weather-image" src="http://openweathermap.org/img/wn/<%= weather.icon %>.png"
@@ -130,101 +134,97 @@
                         <p>Timezone: UTC-<%= weather.timezone / 3600 %>
                         </p>
                     </div>
-
                 </div>
-
             </div>
-
             <% } else { %>
-                <p>Please enter a city name to get its weather information.</p>
+                <p>Something went wrong! Please enter a city name to get its weather information.</p>
                 <% } %>
 
-                    <% if (forecast) { %>
-                        <div id="forecast" class="forecast">
-                            <h1>Forecast</h1>
-                            <div class="forecast-wrapper">
-                                <% forecast.forEach(function(item) { %>
-                                    <div class="forecast-info">
-                                        <img src="http://openweathermap.org/img/wn/<%= item.icon %>.png"
-                                            alt="<%= item.description %>" />
-                                        <p><strong>Time:</strong>
-                                            <%= item.dt_txt.split(' ')%>
-                                                <p><strong>Condition:</strong> <%= item.weatherCondition %> - <%= item.description %></p>
-                                                <p><strong>Temperature:</strong> <%= item.temp %>°C (Feels like: <%= item.feels_like %>°C)</p>
-                                                <p><strong>Min/Max Temperature:</strong> <%= item.temp_min %>°C / <%= item.temp_max %>°C</p>
-                                                <p><strong>Pressure:</strong> <%= item.pressure %> hPa</p>
-                                                <p><strong>Humidity:</strong> <%= item.humidity %>%</p>
-                                                <p><strong>Sea Level:</strong> <%= item.sea_level %> hPa</p>
-                                                <p><strong>Ground Level:</strong> <%= item.grnd_level %> hPa</p>
-                                                <p><strong>Cloudiness:</strong> <%= item.clouds %>%</p>
-                                                <p><strong>Wind Speed:</strong> <%= item.wind_speed %> m/s</p>
-                                                <p><strong>Wind Direction:</strong> <%= item.wind_deg %>°</p>
-                                                <p><strong>Wind Gust:</strong> <%= item.wind_gust %> m/s</p>
-                                                <p><strong>Visibility:</strong> <%= item.visibility %> meters</p>
-                                                <p><strong>Probability of Precipitation:</strong> <%= item.pop %>%</p>
-                                            </div>
-                                <% }); %>
-                            </div>
-                        </div>
-                    <% } %>
-
-    <div id="graphs" class="charts-container">
-        <% chartsData.forEach((chart, index) => { %>
-            <div class="weather-chart">
-                <h3>Weather on <%= chart.date %></h3>
-                <canvas class="weather-card" id="chart<%=index%>" ></canvas>
+        <% if (forecast) { %>
+            <div id="forecast" class="forecast">
+                <h1>Forecast</h1>
+                <div class="forecast-wrapper">
+                    <% forecast.forEach(function(item) { %>
+                        <div class="forecast-info">
+                            <img src="http://openweathermap.org/img/wn/<%= item.icon %>.png"
+                                alt="<%= item.description %>" />
+                            <p><strong>Time:</strong>
+                                <%= item.dt_txt.split(' ')%>
+                                    <p><strong>Condition:</strong> <%= item.weatherCondition %> - <%= item.description %></p>
+                                    <p><strong>Temperature:</strong> <%= item.temp %>°C (Feels like: <%= item.feels_like %>°C)</p>
+                                    <p><strong>Min/Max Temperature:</strong> <%= item.temp_min %>°C / <%= item.temp_max %>°C</p>
+                                    <p><strong>Pressure:</strong> <%= item.pressure %> hPa</p>
+                                    <p><strong>Humidity:</strong> <%= item.humidity %>%</p>
+                                    <p><strong>Sea Level:</strong> <%= item.sea_level %> hPa</p>
+                                    <p><strong>Ground Level:</strong> <%= item.grnd_level %> hPa</p>
+                                    <p><strong>Cloudiness:</strong> <%= item.clouds %>%</p>
+                                    <p><strong>Wind Speed:</strong> <%= item.wind_speed %> m/s</p>
+                                    <p><strong>Wind Direction:</strong> <%= item.wind_deg %>°</p>
+                                    <p><strong>Wind Gust:</strong> <%= item.wind_gust %> m/s</p>
+                                    <p><strong>Visibility:</strong> <%= item.visibility %> meters</p>
+                                    <p><strong>Probability of Precipitation:</strong> <%= item.pop %>%</p>
+                                </div>
+                    <% }); %>
+                </div>
             </div>
-        
-            <script>
-                var ctx = document.getElementById('chart<%=index %>').getContext('2d');
-                var tempChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: <%- JSON.stringify(chart.labels) %>,
-                        datasets: [{
-                            label: 'Temperature(°C)',
-                            data: <%- JSON.stringify(chart.data) %>,
-                            fill: false,
-                            borderColor: 'rgb(75, 192, 192)',
-                            tension: 0.1
-                        }]
-                    },options: {
-                        scales: {
-                            y: {
-                                beginAtZero: false,
-                                title: {
-                                    display: true,
-                                    text: `°C \u2192`,
-                                    font: {
-                                        size: 16
+        <% } %>
+
+        <div id="graphs" class="charts-container">
+            <% chartsData.forEach((chart, index) => { %>
+                <div class="weather-chart">
+                    <h3>Weather on <%= chart.date %></h3>
+                    <canvas class="weather-card" id="chart<%=index%>" ></canvas>
+                </div>
+                <script>
+                    var ctx = document.getElementById('chart<%=index %>').getContext('2d');
+                    var tempChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: <%- JSON.stringify(chart.labels) %>,
+                            datasets: [{
+                                label: 'Temperature(°C)',
+                                data: <%- JSON.stringify(chart.data) %>,
+                                fill: false,
+                                borderColor: 'rgb(75, 192, 192)',
+                                tension: 0.1
+                            }]
+                        },options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: false,
+                                    title: {
+                                        display: true,
+                                        text: `°C \u2192`,
+                                        font: {
+                                            size: 16
+                                        }
+                                    }
+                                },
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'T \u2192',
+                                        font: {
+                                            size: 16
+                                        }
                                     }
                                 }
                             },
-                            x: {
-                                title: {
+                            plugins: {
+                                legend: {
                                     display: true,
-                                    text: 'T \u2192',
-                                    font: {
-                                        size: 16
-                                    }
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: true,
-                                labels: {
-                                    font: {
-                                        size: 14
+                                    labels: {
+                                        font: {
+                                            size: 14
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                });
-            </script>
-        <% }); %>
-    </div>
+                    });
+                </script>
+            <% }); %>
+        </div>
 
     </section>
 

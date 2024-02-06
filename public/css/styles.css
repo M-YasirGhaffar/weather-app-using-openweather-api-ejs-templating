@@ -208,14 +208,15 @@ strong {
   align-items: center;
   position: sticky;
   top: 0;
-  background-color: #333;
+  background-color: rgba(51, 51, 51, 0.644);
   color: #fff;
-  padding: 0.5rem 1rem;
-  z-index: 1000;
+  padding: 1rem;
+  z-index: 100;
+  height: 10vh;
 }
 
 .logo {
-  color: #fff;
+  color: #ffffffd0;
   text-decoration: none;
   font-size: 1.5rem;
 }
@@ -228,32 +229,43 @@ strong {
 .search-form input,
 .search-form button,
 .nav-items a {
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   padding: 0.5rem;
   text-decoration: none;
-  color: #fff;
-  background: #555;
+  color: #ffffffc5;
+  background: #55555557;
   border: none;
   cursor: pointer;
+  border-radius: 8px;
+}
+
+.search-form button {
+  padding: 0.55rem;
+  margin: 0;
 }
 
 .search-form input {
   margin-left: 0;
+  padding: 0.75rem;
+}
+
+.search-form {
+  margin-left: 0;
+  margin-right: auto;
 }
 
 .nav-toggle {
   display: none;
-  /* Initially hidden */
   background-color: #444;
-  /* Make it visible */
   color: white;
-  /* Text color */
   border: none;
-  /* Remove border */
-  padding: 10px;
-  /* Add some padding */
+  padding: 0;
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: x-large;
   margin-left: auto;
-  /* Align to the right */
 }
 
 .hamburger {
@@ -265,22 +277,36 @@ strong {
 
 @media (max-width: 768px) {
   .nav-items {
-    display: none;
+    display: flex;
     flex-direction: column;
+    background-color: rgba(51, 51, 51, 0.774);
+    position: absolute;
     align-items: center;
-    /* Center align items for better mobile view */
+    gap: 0.5rem;
+    padding: 3rem 1rem;
+    top: -100vh;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    transition: 0.5s ease;
+  }
+
+  .nav-items a, .nav-items button, .nav-items input {
+    margin-left: 0.5rem;
+    margin-right: auto;
   }
 
   .nav-items.active {
-    display: flex;
-    /* This ensures that .nav-items is displayed when .active class is added */
+    top: 10vh;
+    left: 0;
   }
 
   .nav-toggle {
-    display: flex;
+    display: inline-block;
   }
 }
-
 
 body::-webkit-scrollbar {
   width: 7px;
