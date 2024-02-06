@@ -33,8 +33,8 @@
         const given = '<%= new Date(weather.dt * 1000).toLocaleString() %>'
         const sunrise = '<%= new Date(weather.sunrise * 1000).toLocaleTimeString() %>'
         const sunset = '<%= new Date(weather.sunset * 1000).toLocaleTimeString() %>'
-
-        let condition = "<%= weather.condition.toLowerCase() %>";
+        let condition = 'clear'
+        condition = "<%= weather.condition.toLowerCase() %>";
         const conditionsAll = ['clear', 'clouds', 'drizzle', 'mist', 'night', 'rain', 'snow', 'thunderstorm']
         console.log(condition);
         let bodyStyle = document.querySelector('body');
