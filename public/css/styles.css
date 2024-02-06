@@ -385,13 +385,13 @@ body::-webkit-scrollbar-corner {
   }
 
   .forecast-info {
-    margin: 0rem 0.5rem;
+    margin: 0.5rem 0.5rem;
     transform: scale(0.80);
   }
 
   .weather-entry {
     padding: 0;
-    margin: 0.2rem;
+    margin: 0.5rem;
     gap: 0rem;
   }
 
