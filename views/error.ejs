@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Weather App</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body style="background: black; color: white;">
+    <div id="error-message">
+        <h1 style="color: red;">Oops!</h1>
+        <% if (error && error.message) { %>
+            <p>
+                <%= error.message %>
+            </p>
+            <% } else { %>
+                <h2>An unexpected error occurred. Please try again later.</h2>
+                <% } %>
+                <a href="/"><p>Go Back to Home</p></a>
+                <h2  id="count-down"></h2>
+    </div>
+
+
+    <script>
+        const redirectCountdown = () => {
+            let countdown = 100;
+            let countdownInterval = setInterval(function () {
+                document.getElementById('count-down').innerText = countdown + ' seconds';
+
+                countdown -= 1;
+
+                if (countdown < 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = '/';
+                }
+            }, 1000);
+        }
+
+        redirectCountdown();
+    </script>
+
+</body>
+
+</html>

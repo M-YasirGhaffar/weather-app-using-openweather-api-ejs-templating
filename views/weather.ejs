@@ -1,33 +1,259 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Weather Forecast -using weather api</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="http://openweathermap.org/img/wn/<%= weather.icon %>.png" alt="Weather icon"
+        type="image/x-icon">
+    <title>Weather <%= weather.city %>
+    </title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<link rel="stylesheet" href="/css/styles.css">
-
-<header>&#9888;This website serves as a demonstration of my understanding and utilization of APIs. It is not designed to be responsive or optimized for different devices or screen sizes. Its purpose is solely to showcase my knowledge and skills in working with APIs.</header>
-
 <body>
-  <h1 id="heading">Weather Forecast for <%= city %></h1>
 
-  <div class="grid">
-    <% let currentDay = ''; %>
-    <% forecast.forEach(function(item) { %>
-      <% if (currentDay !== item.dayName) { %>
-        <% currentDay = item.dayName; %>
-        <div class="grid-item">
-          <h2><%= currentDay %> <img src="<%= item.weatherIconUrl %>" alt="Weather Icon"></h2>
-          <h3><%= item.weatherMain %> - <%= item.weatherStatus %></h3>
-          <ul>
-      <% } %>
-      <li><span><%= item.time %>:</span> <%= item.temperature %>°C <span>Feels like:</span> <%= item.feels_like %>°C <span>PoP:</span> <%= item.precipitationProbability%>% <span>Humidity:</span> <%= item.humidity%></li>
-      <% if (currentDay !== forecast[forecast.length - 1].dayName && forecast[forecast.indexOf(item) + 1].dayName !== currentDay) { %>
-        </ul>
+    <script>
+        function checkCondition(givenDateTime, sunriseTime, sunsetTime) {
+            let givenTime = givenDateTime.split(', ')[1];
+            givenTime = givenTime.substr(0, givenTime.lastIndexOf(' '));
+            let given = new Date('2000-01-01T' + givenTime);
+            let sunrise = new Date('2000-01-01T' + sunriseTime);
+            let sunset = new Date('2000-01-01T' + sunsetTime);
+
+            if (given >= sunrise && given < sunset) {
+                return "Clear";
+            } else {
+                return "Night";
+            }
+        }
+        const given = '<%= new Date(weather.dt * 1000).toLocaleString() %>'
+        const sunrise = '<%= new Date(weather.sunrise * 1000).toLocaleTimeString() %>'
+        const sunset = '<%= new Date(weather.sunset * 1000).toLocaleTimeString() %>'
+
+        let condition = "<%= weather.condition.toLowerCase() %>";
+        const conditionsAll = ['clear', 'clouds', 'drizzle', 'mist', 'night', 'rain', 'snow', 'thunderstorm']
+        console.log(condition);
+        console.log('<%= weather.id %>')
+        let bodyStyle = document.querySelector('body');
+        if (!conditionsAll.includes(condition) && ('<%= weather.id %>').charAt(0) == '7') {
+            condition = 'mist'
+        } else if (!conditionsAll.includes(condition) && !(('<%= weather.id %>').charAt(0) == '7')) {
+            condition = 'clear'
+        }
+        if (condition === 'clear') {
+            condition = checkCondition(given, sunrise, sunset);
+        }
+        bodyStyle.style.backgroundImage = 'url(/assets/' + condition + '.gif)';
+    </script>
+
+    <nav class="navbar">
+        <a href="#" class="logo">SkyCaster</a>
+        <div class="nav-items">
+            <form class="search-form" action="/weather" method="get">
+                <input type="text" id="cityName" name="cityName" placeholder="Enter City Name" required>
+                <button class="submit-button" type="submit">&#128270;</button>
+            </form>
+            <a href="#forecast">Forecast</a>
+            <a href="#graphs">Graphs</a>
         </div>
-      <% } %>
-    <% }); %>
-  </div>
+        <button class="nav-toggle" aria-label="toggle navigation">
+            &equiv;
+        </button>
+    </nav>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const navItems = document.querySelector('.nav-items');
+
+        navToggle.addEventListener('click', () => {
+            console.log('clicked')
+            navItems.classList.toggle('active');
+        });
+    </script>
+
+    <section id="everything">
+
+        <% if (weather) { %>
+            <div id="weather" class="weather">
+                <div class="weather-entry">
+                    <div class="weather-intro">
+                        <img class="weather-image" src="http://openweathermap.org/img/wn/<%= weather.icon %>.png"
+                            alt="Weather Icon" />
+                        <h2>
+                            <%= weather.city %>, <%= weather.country %>
+                        </h2>
+                        <h2>
+                            <%= new Date(weather.dt * 1000).toLocaleString() %>
+                        </h2>
+                        <h2>Temperature: <%= weather.temp %>°C</h2>
+                        <h2>Feels like: <%= weather.feels_like %>°C</h2>
+                        <h2>
+                            <%= (weather.coordinates) %>
+                        </h2>
+                        <h2>
+                            <%= weather.condition %> - <%= weather.description %>
+                        </h2>
+                    </div>
+                    <div class="weather-info">
+                        <p>Minimum Temperature:
+                            <%= weather.temp_min %>°C
+                        </p>
+                        <p>Maximum Temperature:
+                            <%= weather.temp_max %>°C
+                        </p>
+                        <p>Pressure:
+                            <%= weather.pressure %> hPa
+                        </p>
+                        <p>Humidity:
+                            <%= weather.humidity %>%
+                        </p>
+                        <p>Visibility:
+                            <%= weather.visibility %> meters
+                        </p>
+                        <p>Wind Speed:
+                            <%= weather.wind_speed %> m/s
+                        </p>
+                        <p>Wind Direction:
+                            <%= weather.wind_deg %>°
+                        </p>
+                        <p>Wind Gust:
+                            <%= weather.wind_gust %>
+                        </p>
+                        <p>Cloudiness:
+                            <%= weather.clouds %>%
+                        </p>
+                        <p>Sunrise:
+                            <%= new Date(weather.sunrise * 1000).toLocaleTimeString() %>
+                        </p>
+                        <p>Sunset:
+                            <%= new Date(weather.sunset * 1000).toLocaleTimeString() %>
+                        </p>
+                        <p>Timezone: UTC-<%= weather.timezone / 3600 %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% } else { %>
+                <p>Something went wrong! Please enter a city name to get its weather information.</p>
+                <% } %>
+
+        <% if (forecast) { %>
+            <div id="forecast" class="forecast">
+                <h1>Forecast</h1>
+                <div class="forecast-wrapper">
+                    <% forecast.forEach(function(item) { %>
+                        <div class="forecast-info" 
+                            data-aos="fade-left"
+                            data-aos-offset="100"
+                            data-aos-duration="500"
+                        >
+                            <img src="http://openweathermap.org/img/wn/<%= item.icon %>.png"
+                                alt="<%= item.description %>" />
+                            <p><strong>Time:</strong>
+                                <%= item.dt_txt.split(' ')%>
+                                    <p><strong>Condition:</strong> <%= item.weatherCondition %> - <%= item.description %></p>
+                                    <p><strong>Temperature:</strong> <%= item.temp %>°C (Feels like: <%= item.feels_like %>°C)</p>
+                                    <p><strong>Min/Max Temperature:</strong> <%= item.temp_min %>°C / <%= item.temp_max %>°C</p>
+                                    <p><strong>Pressure:</strong> <%= item.pressure %> hPa</p>
+                                    <p><strong>Humidity:</strong> <%= item.humidity %>%</p>
+                                    <p><strong>Sea Level:</strong> <%= item.sea_level %> hPa</p>
+                                    <p><strong>Ground Level:</strong> <%= item.grnd_level %> hPa</p>
+                                    <p><strong>Cloudiness:</strong> <%= item.clouds %>%</p>
+                                    <p><strong>Wind Speed:</strong> <%= item.wind_speed %> m/s</p>
+                                    <p><strong>Wind Direction:</strong> <%= item.wind_deg %>°</p>
+                                    <p><strong>Wind Gust:</strong> <%= item.wind_gust %> m/s</p>
+                                    <p><strong>Visibility:</strong> <%= item.visibility %> meters</p>
+                                    <p><strong>Probability of Precipitation:</strong> <%= item.pop %>%</p>
+                                </div>
+                    <% }); %>
+                </div>
+            </div>
+        <% } %>
+
+        <div id="graphs" class="charts-container">
+            <% chartsData.forEach((chart, index) => { %>
+                <div class="weather-chart">
+                    <h3>Weather on <%= chart.date %></h3>
+                    <canvas class="weather-card" id="chart<%=index%>" 
+                        data-aos="flip-left"
+                        data-aos-easing="ease-out-cubic"
+                        data-aos-duration="500"
+                        ></canvas>
+                </div>
+                <script>
+                    var ctx = document.getElementById('chart<%=index %>').getContext('2d');
+                    var tempChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: <%- JSON.stringify(chart.labels) %>,
+                            datasets: [{
+                                label: 'Temperature(°C)',
+                                data: <%- JSON.stringify(chart.data) %>,
+                                fill: false,
+                                borderColor: 'rgb(75, 192, 192)',
+                                tension: 0.1
+                            }]
+                        },options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: false,
+                                    title: {
+                                        display: true,
+                                        text: `°C \u2192`,
+                                        font: {
+                                            size: 16
+                                        }
+                                    }
+                                },
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'T \u2192',
+                                        font: {
+                                            size: 16
+                                        }
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    labels: {
+                                        font: {
+                                            size: 14
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
+            <% }); %>
+        </div>
+
+    </section>
+
+    <script>
+
+        let element = document.querySelector('body');
+
+        if (weather.condition.length >= 1) {
+            element.style.backgroundImage = 'url(/assets/' + weather.condition.toLowerCase() + '.gif)';
+        } else {
+            console.error('Invalid condition:', weather.condition);
+        }
+
+    </script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
 </body>
+
 </html>
