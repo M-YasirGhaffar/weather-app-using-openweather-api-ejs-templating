@@ -92,10 +92,10 @@ app.get('/weather', async (req, res) => {
       clouds: item.clouds.all, // Cloudiness, percentage
       wind_speed: item.wind.speed, // Wind speed
       wind_deg: item.wind.deg, // Wind direction in degrees
-      wind_gust: item.wind.gust, // Wind gust speed (if available)
-      visibility: item.visibility, // Visibility in meters
-      pop: item.pop, // Probability of precipitation
-      dt: item.dt, // Time of data forecasted, UNIX timestamp
+      wind_gust: item.wind.gust, 
+      visibility: item.visibility, 
+      pop: item.pop, 
+      dt: item.dt, 
       dt_txt: item.dt_txt // Textual representation of dt, local time
   }));
 
@@ -118,6 +118,8 @@ const chartsData = Object.keys(groupedByDay).map(date => {
       data: items.map(item => item.temp) // Convert Kelvin to Celsius
   };
 });
+console.log(JSON.stringify(chartsData, null, 2)); // Add this before res.render to check the structure
+
   
     res.render('weather', { weather: weatherData, forecast: forecastData, chartsData: chartsData });
 
