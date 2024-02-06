@@ -25,9 +25,9 @@
             let sunset = new Date('2000-01-01T' + sunsetTime);
 
             if (given >= sunrise && given < sunset) {
-                return "Clear";
+                return "clear";
             } else {
-                return "Night";
+                return "night";
             }
         }
         const given = '<%= new Date(weather.dt * 1000).toLocaleString() %>'
@@ -45,6 +45,7 @@
         }
         if (condition === 'clear') {
             condition = checkCondition(given, sunrise, sunset);
+            console.log(condition)
         }
         bodyStyle.style.backgroundImage = 'url(/assets/' + condition + '.gif)';
     </script>
