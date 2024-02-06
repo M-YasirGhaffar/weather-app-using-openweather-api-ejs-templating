@@ -72,19 +72,19 @@
 
         <% if (weather) { %>
 
-            <div class="weather">
+            <div id="weather" class="weather">
 
                 <div class="weather-entry">
                     <div class="weather-intro">
                         <img class="weather-image" src="http://openweathermap.org/img/wn/<%= weather.icon %>.png"
                             alt="Weather Icon" />
-                        <h1>
+                        <h2>
                             <%= weather.city %>, <%= weather.country %>
-                        </h1>
-                        <h1>
+                        </h2>
+                        <h2>
                             <%= new Date(weather.dt * 1000).toLocaleString() %>
-                        </h1>
-                        <h1>Temperature: <%= weather.temp %>°C</h1>
+                        </h2>
+                        <h2>Temperature: <%= weather.temp %>°C</h2>
                         <h2>Feels like: <%= weather.feels_like %>°C</h2>
                         <h2>
                             <%= (weather.coordinates) %>
@@ -140,7 +140,7 @@
                 <% } %>
 
                     <% if (forecast) { %>
-                        <div class="forecast">
+                        <div id="forecast" class="forecast">
                             <h1>Forecast</h1>
                             <div class="forecast-wrapper">
                                 <% forecast.forEach(function(item) { %>
@@ -161,14 +161,14 @@
                                                 <p><strong>Wind Direction:</strong> <%= item.wind_deg %>°</p>
                                                 <p><strong>Wind Gust:</strong> <%= item.wind_gust %> m/s</p>
                                                 <p><strong>Visibility:</strong> <%= item.visibility %> meters</p>
-                                                <p><strong>Probability of Precipitation:</strong> <%= item.pop *100 %>%</p>
+                                                <p><strong>Probability of Precipitation:</strong> <%= item.pop %>%</p>
                                             </div>
                                 <% }); %>
                             </div>
                         </div>
                     <% } %>
 
-    <div class="charts-container">
+    <div id="graphs" class="charts-container">
         <% chartsData.forEach((chart, index) => { %>
             <div class="weather-chart">
                 <h3>Weather on <%= chart.date %></h3>

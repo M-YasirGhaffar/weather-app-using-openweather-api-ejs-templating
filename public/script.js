@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = `/weather?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`;
     }
 
-    document.getElementById('cityForm').addEventListener('submit', function(e) {
+    document.getElementById('cityForm').addEventListener('submit', function (e) {
         e.preventDefault();
         const cityName = document.getElementById('cityName').value;
         window.location.href = `/weather?cityName=${encodeURIComponent(cityName)}`;

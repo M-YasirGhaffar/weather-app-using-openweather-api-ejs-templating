@@ -25,7 +25,7 @@ h2,
 h3,
 h4 {
   font-weight: 500;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.507); 
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.507);
 }
 
 h5,
@@ -72,20 +72,21 @@ strong {
 .weather-intro {
   display: flex;
   flex-direction: column;
-  justify-content:flex-start;
+  justify-content: flex-start;
   align-items: left;
   padding: 1.1rem;
 
   backdrop-filter: blur(20px) saturate(61%);
   -webkit-backdrop-filter: blur(20px) saturate(61%);
   border-radius: 12px;
-  box-shadow:  4px 4px 8px #86868662,
-             -4px -4px 8px #57575779;
+  box-shadow: 4px 4px 8px #86868662,
+    -4px -4px 8px #57575779;
 }
 
-.weather-intro:hover, .weather-info:hover {
-  box-shadow:  4px 4px 8px #383838,
-  -4px -4px 8px #575757ab;
+.weather-intro:hover,
+.weather-info:hover {
+  box-shadow: 4px 4px 8px #383838,
+    -4px -4px 8px #575757ab;
 }
 
 .weather-info {
@@ -95,8 +96,8 @@ strong {
   -webkit-backdrop-filter: blur(20px) saturate(61%);
   border-radius: 12px;
   border: 1px solid rgba(209, 213, 219, 0.18);
-  box-shadow:  4px 4px 8px #86868662,
-             -4px -4px 8px #57575779;
+  box-shadow: 4px 4px 8px #86868662,
+    -4px -4px 8px #57575779;
 }
 
 
@@ -111,12 +112,14 @@ strong {
   /* margin: auto; */
 }
 
-
+.forecast {
+  margin: 1rem 0;
+}
 
 .forecast h1 {
   font-size: 5rem;
   font-weight: 900;
-  -webkit-text-stroke: 5px rgb(255, 255, 255);
+  -webkit-text-stroke: 4px rgb(255, 255, 255);
   letter-spacing: 3px;
   text-align: center;
   color: transparent;
@@ -137,7 +140,6 @@ strong {
 .forecast-info {
   border-radius: 15px;
   min-width: 350px;
-  max-width: 350px;
   text-align: left;
   padding: 1rem;
   margin: 1rem;
@@ -240,12 +242,18 @@ strong {
 }
 
 .nav-toggle {
-  display: none; /* Initially hidden */
-  background-color: #444; /* Make it visible */
-  color: white; /* Text color */
-  border: none; /* Remove border */
-  padding: 10px; /* Add some padding */
-  margin-left: auto; /* Align to the right */
+  display: none;
+  /* Initially hidden */
+  background-color: #444;
+  /* Make it visible */
+  color: white;
+  /* Text color */
+  border: none;
+  /* Remove border */
+  padding: 10px;
+  /* Add some padding */
+  margin-left: auto;
+  /* Align to the right */
 }
 
 .hamburger {
@@ -254,19 +262,22 @@ strong {
   background: #fff;
   transition: all 0.3s ease-in-out;
 }
+
 @media (max-width: 768px) {
   .nav-items {
-      display: none;
-      flex-direction: column;
-      align-items: center; /* Center align items for better mobile view */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    /* Center align items for better mobile view */
   }
 
   .nav-items.active {
-      display: flex; /* This ensures that .nav-items is displayed when .active class is added */
+    display: flex;
+    /* This ensures that .nav-items is displayed when .active class is added */
   }
 
   .nav-toggle {
-      display: flex;
+    display: flex;
   }
 }
 
@@ -275,32 +286,100 @@ body::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
+
 body::-webkit-scrollbar-button {
   width: 0px;
   height: 0px;
 }
+
 body::-webkit-scrollbar-thumb {
   background: #2e2e2e;
   border: 0px groove #ffffff;
   border-radius: 50px;
 }
+
 body::-webkit-scrollbar-thumb:hover {
   background: #383838;
 }
+
 body::-webkit-scrollbar-thumb:active {
   background: #595959;
 }
+
 body::-webkit-scrollbar-track {
   background: #ffffff;
   border: 0px none #ffffff;
   border-radius: 42px;
 }
+
 body::-webkit-scrollbar-track:hover {
   background: #e6e6e6;
 }
+
 body::-webkit-scrollbar-track:active {
   background: #d1d1d1;
 }
+
 body::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+@media (max-width: 520px) {
+  .forecast h1 {
+    font-size: 3rem;
+    -webkit-text-stroke: 1px rgb(255, 255, 255);
+  }
+
+  .weather-card {
+    padding: 0.3rem;
+    margin: 0;
+  }
+
+  .charts-container {
+    margin: 0;
+    padding: 0;
+  }
+
+  .weather-chart {
+    transform: scale(0.93);
+    padding: 0.8rem;
+    margin: 0;
+    width: 100%;
+  }
+
+  .weather-chart h3 {
+    font-size: 1rem;
+    margin: 0.5rem 0 0;
+  }
+
+  .forecast-wrapper {
+    margin: 0;
+    padding: 0;
+    gap: 0rem;
+  }
+
+  .forecast-info {
+    margin: 0rem 0.5rem;
+    transform: scale(0.80);
+  }
+
+  .weather-entry {
+    padding: 0;
+    margin: 0.2rem;
+    gap: 0rem;
+  }
+
+  .weather-info {
+    transform: scale(0.90);
+    padding: 0.2;
+    margin: 0;
+
+  }
+
+  .weather-intro {
+    transform: scale(0.90);
+    margin: 0;
+    padding: 0.2;
+
+  }
 }
