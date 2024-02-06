@@ -37,7 +37,6 @@
         let condition = "<%= weather.condition.toLowerCase() %>";
         const conditionsAll = ['clear', 'clouds', 'drizzle', 'mist', 'night', 'rain', 'snow', 'thunderstorm']
         console.log(condition);
-        console.log('<%= weather.id %>')
         let bodyStyle = document.querySelector('body');
         if (!conditionsAll.includes(condition) && ('<%= weather.id %>').charAt(0) == '7') {
             condition = 'mist'
@@ -70,7 +69,6 @@
         const navItems = document.querySelector('.nav-items');
 
         navToggle.addEventListener('click', () => {
-            console.log('clicked')
             navItems.classList.toggle('active');
         });
     </script>

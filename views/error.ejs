@@ -19,27 +19,27 @@
                 <h2>An unexpected error occurred. Please try again later.</h2>
                 <% } %>
                 <a href="/"><p>Go Back to Home</p></a>
+
+                <script>
+                    const redirectCountdown = () => {
+                        let countdown = 100;
+                        let countdownInterval = setInterval(function () {
+                            document.getElementById('count-down').innerText = countdown + ' seconds';
+            
+                            countdown -= 1;
+            
+                            if (countdown < 0) {
+                                clearInterval(countdownInterval);
+                                window.location.href = '/';
+                            }
+                        }, 1000);
+                    }
+            
+                    redirectCountdown();
+                </script>
+
                 <h2  id="count-down"></h2>
     </div>
-
-
-    <script>
-        const redirectCountdown = () => {
-            let countdown = 100;
-            let countdownInterval = setInterval(function () {
-                document.getElementById('count-down').innerText = countdown + ' seconds';
-
-                countdown -= 1;
-
-                if (countdown < 0) {
-                    clearInterval(countdownInterval);
-                    window.location.href = '/';
-                }
-            }, 1000);
-        }
-
-        redirectCountdown();
-    </script>
 
 </body>
 

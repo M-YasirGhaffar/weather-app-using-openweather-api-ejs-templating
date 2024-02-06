@@ -118,8 +118,6 @@ app.get('/weather', async (req, res) => {
         data: items.map(item => item.temp) // Convert Kelvin to Celsius
       };
     });
-    console.log(JSON.stringify(chartsData, null, 2)); // Add this before res.render to check the structure
-
 
     res.render('weather', { weather: weatherData, forecast: forecastData, chartsData: chartsData });
 
