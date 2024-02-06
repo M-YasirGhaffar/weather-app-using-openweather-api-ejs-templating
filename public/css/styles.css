@@ -44,7 +44,7 @@ strong {
 }
 
 .weather {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,13 +56,13 @@ strong {
   background-color: rgba(44, 44, 44, 0.4);
   border-radius: 15px;
   padding: 4rem;
+  margin: 5rem;
   border: 1px solid rgba(209, 213, 219, .23);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   gap: 3rem;
-
   backdrop-filter: blur(20px) saturate(61%);
   -webkit-backdrop-filter: blur(20px) saturate(61%);
   border-radius: 12px;
@@ -141,7 +141,7 @@ strong {
   text-align: left;
   padding: 1rem;
   margin: 1rem;
-  background-color: rgba(44, 44, 44, 0.4);
+  background-color: rgba(44, 44, 44, 0.603);
 
   backdrop-filter: blur(20px) saturate(61%);
   -webkit-backdrop-filter: blur(20px) saturate(61%);
@@ -157,28 +157,6 @@ strong {
 .forecast-info strong {
   font-weight: 200;
 }
-
-/* .forecast-wrapper {
-
-}
-
-.forecast-entry:nth-child(even) {
-  justify-content: right;
-}
-
-.forecast-entry:nth-child(even) .forecast-info {
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  padding: 2rem;
-  backdrop-filter: blur(20px) saturate(61%);
-  -webkit-backdrop-filter: blur(20px) saturate(61%);
-  border-radius: 12px;
-}
-
-.forecast-entry:nth-child(odd) .forecast-info {
-  background-color: #000000; 
-} */
 
 .charts-container {
   height: auto;
@@ -199,16 +177,130 @@ strong {
   justify-content: center;
   text-align: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 12px;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.weather-chart h3 {
+  margin-top: 0.5rem;
+  color: rgb(192, 192, 192);
 }
 
 .weather-card {
   backdrop-filter: blur(5px) saturate(180%);
   -webkit-backdrop-filter: blur(5px) saturate(180%);
-  background-color: rgba(0, 0, 0, 0.75);
   border: 1px solid rgba(209, 213, 219, 0.18);
-  width: max-content;
+  width: 100%;
   border-radius: 12px;
   padding: 1rem;
   margin: 1.5rem;
   margin-bottom: 0.2rem;
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+}
+
+.logo {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.nav-items {
+  display: flex;
+  align-items: center;
+}
+
+.search-form input,
+.search-form button,
+.nav-items a {
+  margin-left: 1rem;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: #fff;
+  background: #555;
+  border: none;
+  cursor: pointer;
+}
+
+.search-form input {
+  margin-left: 0;
+}
+
+.nav-toggle {
+  display: none; /* Initially hidden */
+  background-color: #444; /* Make it visible */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  padding: 10px; /* Add some padding */
+  margin-left: auto; /* Align to the right */
+}
+
+.hamburger {
+  display: block;
+  height: 3px;
+  background: #fff;
+  transition: all 0.3s ease-in-out;
+}
+@media (max-width: 768px) {
+  .nav-items {
+      display: none;
+      flex-direction: column;
+      align-items: center; /* Center align items for better mobile view */
+  }
+
+  .nav-items.active {
+      display: flex; /* This ensures that .nav-items is displayed when .active class is added */
+  }
+
+  .nav-toggle {
+      display: flex;
+  }
+}
+
+
+body::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+body::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+body::-webkit-scrollbar-thumb {
+  background: #2e2e2e;
+  border: 0px groove #ffffff;
+  border-radius: 50px;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: #383838;
+}
+body::-webkit-scrollbar-thumb:active {
+  background: #595959;
+}
+body::-webkit-scrollbar-track {
+  background: #ffffff;
+  border: 0px none #ffffff;
+  border-radius: 42px;
+}
+body::-webkit-scrollbar-track:hover {
+  background: #e6e6e6;
+}
+body::-webkit-scrollbar-track:active {
+  background: #d1d1d1;
+}
+body::-webkit-scrollbar-corner {
+  background: transparent;
 }

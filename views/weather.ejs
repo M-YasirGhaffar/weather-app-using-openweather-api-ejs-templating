@@ -52,13 +52,23 @@
         bodyStyle.style.backgroundImage = 'url(/assets/' + condition + '.gif)';
     </script>
 
-    <section id="everything">
-
-        <h1>SkyCaster</h1>
-        <form id="cityForm" action="/weather" method="get">
+<nav class="navbar">
+    <a href="#" class="logo">SkyCaster</a>
+    <div class="nav-items">
+        <form class="search-form" action="/weather" method="get">
             <input type="text" id="cityName" name="cityName" placeholder="Enter City Name" required>
-            <button type="submit">Get Weather</button>
+            <button type="submit">Search</button>
         </form>
+        <a href="#forecast">Forecast</a>
+        <a href="#graphs">Graphs</a>
+    </div>
+    <button class="nav-toggle" aria-label="toggle navigation">
+        <span class="hamburger"></span>
+    </button>
+</nav>
+
+
+    <section id="everything">
 
         <% if (weather) { %>
 
